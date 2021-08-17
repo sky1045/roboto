@@ -6,7 +6,8 @@ import java.util.*
 @Service
 class ArticleService(private val repository: ArticleRepository) {
     fun create(title: String, content: String) {
-        val article = Article(title, content)
+        val mapper = ArticleMapper()
+        val article = mapper.requestToEntity(title, content)
         repository.save(article)
     }
 
