@@ -1,5 +1,6 @@
 package com.example.roboto.article
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -12,7 +13,9 @@ class Article(title: String, content: String, createdAt: LocalDateTime?, updated
     val id: Long? = null
     val title: String = title
     val content: String = content
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd HH:mm", timezone = "Asia/Seoul")
     val createdAt: LocalDateTime? = createdAt
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd HH:mm", timezone = "Asia/Seoul")
     val updatedAt: LocalDateTime? = updatedAt
 
     override fun equals(other: Any?): Boolean {
