@@ -20,7 +20,7 @@ class ArticleController {
     }
 
     @PostMapping("/article")
-    fun createArticle(@RequestBody article: Article) {
+    fun createArticle(@RequestBody article: Article): Article {
         return service.create(article.title, article.content)
     }
 }
