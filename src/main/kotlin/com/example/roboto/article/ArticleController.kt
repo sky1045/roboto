@@ -1,6 +1,7 @@
 package com.example.roboto.article
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -10,8 +11,11 @@ class ArticleController {
     private lateinit var service: ArticleService
 
     @GetMapping("/article")
-    fun getArticles(): List<Article> {
-        return service.all()
+    fun getArticles(
+        @RequestParam("page", defaultValue = "0") page: Int,
+        @RequestParam("size", defaultValue = "5") size: Int
+    ): Page<Article> {
+        return service.all(page, size)
     }
 
     @GetMapping("/article/{id}")
