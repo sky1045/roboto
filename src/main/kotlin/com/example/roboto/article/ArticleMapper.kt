@@ -7,11 +7,21 @@ import java.time.LocalDateTime
 class ArticleMapper {
     fun requestToEntity(title: String, content: String): Article {
         val now = LocalDateTime.now()
-
         return Article(
             title = title,
             content = content,
             createdAt = now,
+            updatedAt = now
+        )
+    }
+
+    fun entityToRequest(oldArticle: Article, article: Article): Article {
+        val now = LocalDateTime.now()
+        return Article(
+            id = oldArticle.id,
+            title = article.title,
+            content = article.content,
+            createdAt = oldArticle.createdAt,
             updatedAt = now
         )
     }

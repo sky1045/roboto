@@ -27,4 +27,9 @@ class ArticleController {
     fun createArticle(@RequestBody article: Article): Article {
         return service.create(article.title, article.content)
     }
+
+    @PutMapping("/article/{id}")
+    fun updateArticle(@PathVariable id: Long, @RequestBody article: Article): Article {
+        return service.update(id, article)
+    }
 }

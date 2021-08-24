@@ -7,10 +7,10 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "articles")
-class Article(title: String, content: String, createdAt: LocalDateTime?, updatedAt: LocalDateTime?) {
+class Article(id: Long ?= null, title: String, content: String, createdAt: LocalDateTime?, updatedAt: LocalDateTime?) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    val id: Long? = id
     val title: String = title
     val content: String = content
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yy-MM-dd HH:mm", timezone = "Asia/Seoul")

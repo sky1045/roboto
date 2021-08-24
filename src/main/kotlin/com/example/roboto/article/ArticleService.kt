@@ -3,6 +3,7 @@ package com.example.roboto.article
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -14,12 +15,16 @@ class ArticleService(private val repository: ArticleRepository) {
         return repository.saveAndFlush(article)
     }
 
-//    fun all(): List<Article> {
-//        return repository.findAll()
-//    }
+    fun update(id: Long, article: Article): Article {
+        val mapper = ArticleMapper()
+        val oldArticle = repository.findById(id)
+        val newArticle = mapper.entityToRequest(oldArticle.get(), article)
+        println(newArticle.toString())
+        return repository.saveAndFlush(newArticle)
+    }
 
     fun all(page: Int = 0, size: Int = 5): Page<Article>  {
-        val pageable = PageRequest.of(page, size)
+        val pageable = PageRequest.of(page, size, Sort.by("createdAt").descending())
         return repository.findAll(pageable)
     }
 
